@@ -36,7 +36,7 @@ const FLAGGED_WRONG = 12;
 const EXPLODED = 13;
 const SKULL = 14;
 
-const PLAY_CLIENT_SIDE = false; // * Not playing game
+const PLAY_CLIENT_SIDE = true;
 
 // let BINOMIAL;
 
@@ -2025,6 +2025,7 @@ export async function doAnalysis() {
 
         const solve = await solver(board, options);  // look for solutions
         const hints = solve.actions;
+        console.log("solve.other: ", solve.other);
 
         justPressedAnalyse = true;
         console.log("hints:" , hints);
