@@ -69,7 +69,11 @@ function highlightCell(x, y) {
 
 function extractBoard() {
     let data = "";
-    const totalMines = document.getElementById("custom_mines")?.value || ((100 * parseInt(document.getElementById("top_area_mines_100").className.split("hdd_top-area-num")[1])) + (10 * parseInt(document.getElementById("top_area_mines_10").className.split("hdd_top-area-num")[1])) + parseInt(document.getElementById("top_area_mines_1").className.split("hdd_top-area-num")[1]));
+    const totalMines = document.getElementById("custom_mines")?.value ||
+        (document.getElementById("level_select_1")?.classList.contains("active") ? 10 :
+        document.getElementById("level_select_2")?.classList.contains("active") ? 40 :
+        document.getElementById("level_select_3")?.classList.contains("active") ? 99 :
+        75); // PvP mode
     
     const allCellsHTML = document.getElementById("AreaBlock");
     if (!allCellsHTML) {
