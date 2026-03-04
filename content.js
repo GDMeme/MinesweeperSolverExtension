@@ -75,21 +75,19 @@ function extractBoard() {
     let mines = null;
     
     if (el) {
-      const encoded = el.getAttribute("data-content");
-    
-      const textarea = document.createElement("textarea");
-      textarea.innerHTML = encoded;
-      const decoded = textarea.value;
-    
-      const match = decoded.match(/\/(\d+)/);
-      mines = match ? Number(match[1]) : 75; // PvP mode
-    }
-    
-    const totalMines = document.getElementById("custom_mines")?.value ||
-        (document.getElementById("level_select_1")?.classList.contains("active") ? 10 :
+        const encoded = el.getAttribute("data-content");
+        
+        const textarea = document.createElement("textarea");
+        textarea.innerHTML = encoded;
+        const decoded = textarea.value;
+        
+        const match = decoded.match(/\/(\d+)/);
+        mines = Number(match[1]);
+    } else {
+        mines = document.getElementById("level_select_1")?.classList.contains("active") ? 10 :
         document.getElementById("level_select_2")?.classList.contains("active") ? 40 :
-        document.getElementById("level_select_3")?.classList.contains("active") ? 99 :
-        mines);
+        document.getElementById("level_select_3")?.classList.contains("active") ? 99 : 75;
+    }
             
     const allCellsHTML = document.getElementById("AreaBlock");
     if (!allCellsHTML) {
@@ -127,5 +125,5 @@ function extractBoard() {
 
     height = newHeight + 1;
 
-    return `${width}x${height}x${totalMines}\n` + data;
+    return `${width}x${height}x${mines}\n` + data;
 }
